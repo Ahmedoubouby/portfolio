@@ -1,0 +1,1161 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ahmedou Bouby — Data Analyst & MIAGE</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<style>
+:root {
+  --orange: #ff8c00;
+  --orange-dim: rgba(255,140,0,0.15);
+  --orange-border: rgba(255,140,0,0.3);
+  --bg: #070b17;
+  --bg2: #0c1220;
+  --bg3: #101828;
+  --text: #e8eaf0;
+  --text-dim: rgba(232,234,240,0.5);
+  --text-dimmer: rgba(232,234,240,0.25);
+  --white: #ffffff;
+}
+
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 300;
+  line-height: 1.7;
+  overflow-x: hidden;
+}
+
+/* ─── SCROLLBAR ─── */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--orange); border-radius: 2px; }
+
+/* ─── NAV ─── */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 60px;
+  background: rgba(7,11,23,0.85);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(255,140,0,0.08);
+  transition: all 0.3s;
+}
+
+.nav-logo {
+  font-family: 'Syne', sans-serif;
+  font-weight: 800;
+  font-size: 20px;
+  color: var(--white);
+  text-decoration: none;
+  letter-spacing: -0.5px;
+}
+.nav-logo span { color: var(--orange); }
+
+.nav-links {
+  display: flex;
+  gap: 40px;
+  list-style: none;
+}
+.nav-links a {
+  color: var(--text-dim);
+  text-decoration: none;
+  font-size: 13px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  transition: color 0.2s;
+}
+.nav-links a:hover { color: var(--orange); }
+
+.nav-cta {
+  padding: 10px 24px;
+  border: 1px solid var(--orange-border);
+  color: var(--orange);
+  text-decoration: none;
+  font-size: 12px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  transition: all 0.2s;
+  font-family: 'DM Sans', sans-serif;
+}
+.nav-cta:hover { background: var(--orange); color: var(--bg); }
+
+/* ─── HERO ─── */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  padding: 120px 60px 80px;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 80% 60% at 60% 20%, rgba(255,140,0,0.08) 0%, transparent 60%),
+    radial-gradient(ellipse 50% 40% at 10% 80%, rgba(26,58,122,0.2) 0%, transparent 60%);
+}
+
+.hero-grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255,140,0,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,140,0,0.04) 1px, transparent 1px);
+  background-size: 60px 60px;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 800px;
+}
+
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 16px;
+  border: 1px solid var(--orange-border);
+  border-radius: 100px;
+  font-size: 11px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--orange);
+  margin-bottom: 32px;
+  animation: fadeUp 0.6s ease both;
+}
+.hero-badge::before {
+  content: '';
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--orange);
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(1.3); }
+}
+
+.hero-name {
+  font-family: 'Syne', sans-serif;
+  font-weight: 800;
+  font-size: clamp(52px, 7vw, 96px);
+  line-height: 0.95;
+  letter-spacing: -3px;
+  color: var(--white);
+  margin-bottom: 16px;
+  animation: fadeUp 0.6s 0.1s ease both;
+}
+.hero-name .accent { color: var(--orange); }
+
+.hero-sub {
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 300;
+  font-size: clamp(16px, 2.5vw, 22px);
+  color: var(--text-dim);
+  margin-bottom: 40px;
+  animation: fadeUp 0.6s 0.2s ease both;
+}
+.hero-sub strong { color: var(--text); font-weight: 400; }
+
+.hero-tags {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 52px;
+  animation: fadeUp 0.6s 0.3s ease both;
+}
+.htag {
+  padding: 6px 14px;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 4px;
+  font-size: 12px;
+  letter-spacing: 1px;
+  color: var(--text-dim);
+}
+.htag.hot {
+  border-color: var(--orange-border);
+  color: var(--orange);
+  background: var(--orange-dim);
+}
+
+.hero-actions {
+  display: flex;
+  gap: 16px;
+  animation: fadeUp 0.6s 0.4s ease both;
+}
+
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 16px 36px;
+  background: var(--orange);
+  color: var(--bg);
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 14px;
+  letter-spacing: 1px;
+  transition: all 0.2s;
+  font-family: 'DM Sans', sans-serif;
+}
+.btn-primary:hover { background: #ffaa33; transform: translateY(-2px); }
+
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 16px 36px;
+  border: 1px solid var(--orange-border);
+  color: var(--orange);
+  text-decoration: none;
+  font-size: 14px;
+  letter-spacing: 1px;
+  transition: all 0.2s;
+  font-family: 'DM Sans', sans-serif;
+}
+.btn-secondary:hover { background: var(--orange-dim); transform: translateY(-2px); }
+
+/* Floating right element */
+.hero-right {
+  position: absolute;
+  right: 60px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  animation: fadeLeft 0.8s 0.5s ease both;
+}
+
+.stat-box {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,140,0,0.15);
+  padding: 20px 28px;
+  min-width: 200px;
+  backdrop-filter: blur(10px);
+}
+.stat-box .s-label {
+  font-size: 9px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--text-dimmer);
+  margin-bottom: 6px;
+}
+.stat-box .s-val {
+  font-family: 'Syne', sans-serif;
+  font-weight: 700;
+  font-size: 22px;
+  color: var(--orange);
+}
+.stat-box .s-desc {
+  font-size: 11px;
+  color: var(--text-dim);
+  margin-top: 2px;
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeLeft {
+  from { opacity: 0; transform: translate(24px, -50%); }
+  to { opacity: 1; transform: translate(0, -50%); }
+}
+
+/* ─── SECTIONS ─── */
+section { padding: 100px 60px; }
+
+.section-label {
+  font-size: 10px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--orange);
+  margin-bottom: 16px;
+}
+
+.section-title {
+  font-family: 'Syne', sans-serif;
+  font-weight: 700;
+  font-size: clamp(32px, 4vw, 52px);
+  letter-spacing: -1.5px;
+  color: var(--white);
+  line-height: 1.1;
+  margin-bottom: 60px;
+}
+.section-title span { color: var(--orange); }
+
+/* ─── ABOUT ─── */
+#about { background: var(--bg2); }
+
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
+}
+
+.about-text p {
+  font-size: 16px;
+  color: var(--text-dim);
+  margin-bottom: 20px;
+  line-height: 1.8;
+}
+.about-text p strong { color: var(--text); font-weight: 400; }
+
+.about-langs {
+  margin-top: 32px;
+  display: flex;
+  gap: 16px;
+}
+.lang-chip {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  border: 1px solid rgba(255,255,255,0.08);
+  font-size: 12px;
+  color: var(--text-dim);
+}
+.lang-chip .flag { font-size: 16px; }
+
+.about-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.acard {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 20px 24px;
+  background: var(--bg3);
+  border: 1px solid rgba(255,255,255,0.05);
+  border-left: 3px solid var(--orange);
+  transition: transform 0.2s;
+}
+.acard:hover { transform: translateX(4px); }
+.acard .icon {
+  font-size: 28px;
+  min-width: 44px;
+  text-align: center;
+}
+.acard .ac-title {
+  font-weight: 500;
+  font-size: 14px;
+  color: var(--white);
+  margin-bottom: 2px;
+}
+.acard .ac-sub {
+  font-size: 12px;
+  color: var(--text-dim);
+}
+
+/* ─── SKILLS ─── */
+#skills { background: var(--bg); }
+
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 24px;
+}
+
+.skill-cat {
+  background: var(--bg2);
+  border: 1px solid rgba(255,255,255,0.05);
+  padding: 32px;
+  transition: border-color 0.2s;
+}
+.skill-cat:hover { border-color: var(--orange-border); }
+
+.skill-cat-title {
+  font-family: 'Syne', sans-serif;
+  font-weight: 600;
+  font-size: 14px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--orange);
+  margin-bottom: 24px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid rgba(255,140,0,0.2);
+}
+
+.skill-list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.skill-item {}
+.skill-name {
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+  color: var(--text);
+  margin-bottom: 6px;
+}
+.skill-name span { color: var(--text-dimmer); font-size: 11px; }
+
+.skill-bar {
+  height: 2px;
+  background: rgba(255,255,255,0.07);
+  border-radius: 1px;
+  overflow: hidden;
+}
+.skill-fill {
+  height: 100%;
+  background: linear-gradient(to right, var(--orange), #ffb347);
+  border-radius: 1px;
+  transform-origin: left;
+  animation: barGrow 1s ease both;
+}
+@keyframes barGrow {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}
+
+/* ─── EXPERIENCE ─── */
+#experience { background: var(--bg2); }
+
+.timeline {
+  position: relative;
+  padding-left: 40px;
+}
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 8px; bottom: 0;
+  width: 1px;
+  background: linear-gradient(to bottom, var(--orange), transparent);
+}
+
+.exp-item {
+  position: relative;
+  margin-bottom: 64px;
+  padding-bottom: 64px;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+.exp-item:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+
+.exp-item::before {
+  content: '';
+  position: absolute;
+  left: -46px;
+  top: 6px;
+  width: 12px; height: 12px;
+  border-radius: 50%;
+  background: var(--orange);
+  box-shadow: 0 0 16px var(--orange);
+}
+
+.exp-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.exp-co {
+  font-family: 'Syne', sans-serif;
+  font-weight: 700;
+  font-size: 22px;
+  color: var(--white);
+  letter-spacing: -0.5px;
+}
+
+.exp-badge {
+  padding: 4px 12px;
+  background: var(--orange-dim);
+  border: 1px solid var(--orange-border);
+  color: var(--orange);
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  border-radius: 2px;
+}
+.exp-badge.stage {
+  background: rgba(100,160,255,0.1);
+  border-color: rgba(100,160,255,0.3);
+  color: #64a0ff;
+}
+
+.exp-role {
+  font-size: 15px;
+  font-weight: 400;
+  color: var(--text-dim);
+  margin-bottom: 6px;
+}
+.exp-meta {
+  font-size: 12px;
+  color: var(--text-dimmer);
+  letter-spacing: 1px;
+  margin-bottom: 24px;
+}
+
+.exp-points {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.exp-points li {
+  display: flex;
+  gap: 12px;
+  font-size: 14px;
+  color: var(--text-dim);
+  line-height: 1.6;
+}
+.exp-points li::before {
+  content: '▸';
+  color: var(--orange);
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+.exp-techs {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-top: 20px;
+}
+.tech-tag {
+  padding: 4px 12px;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  font-size: 11px;
+  color: var(--text-dim);
+  letter-spacing: 1px;
+  border-radius: 2px;
+}
+
+/* ─── PROJECTS ─── */
+#projects { background: var(--bg); }
+
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 24px;
+}
+
+.project-card {
+  background: var(--bg2);
+  border: 1px solid rgba(255,255,255,0.05);
+  overflow: hidden;
+  transition: all 0.3s;
+  cursor: pointer;
+}
+.project-card:hover {
+  border-color: var(--orange-border);
+  transform: translateY(-4px);
+}
+
+.project-top {
+  height: 160px;
+  background: linear-gradient(135deg, var(--bg3), var(--bg2));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 52px;
+  position: relative;
+  overflow: hidden;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+.project-top::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(255,140,0,0.05), transparent);
+}
+
+.project-body { padding: 28px; }
+.project-title {
+  font-family: 'Syne', sans-serif;
+  font-weight: 700;
+  font-size: 18px;
+  color: var(--white);
+  margin-bottom: 10px;
+}
+.project-desc {
+  font-size: 13px;
+  color: var(--text-dim);
+  line-height: 1.7;
+  margin-bottom: 20px;
+}
+.project-tags {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+.ptag {
+  padding: 3px 10px;
+  border: 1px solid rgba(255,140,0,0.2);
+  font-size: 10px;
+  letter-spacing: 1px;
+  color: var(--orange);
+  border-radius: 2px;
+}
+
+/* ─── EDUCATION ─── */
+#education { background: var(--bg2); }
+
+.edu-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 24px;
+}
+
+.edu-card {
+  padding: 36px;
+  background: var(--bg3);
+  border: 1px solid rgba(255,255,255,0.05);
+  border-top: 3px solid var(--orange);
+  transition: transform 0.2s;
+}
+.edu-card:hover { transform: translateY(-4px); }
+
+.edu-degree {
+  font-family: 'Syne', sans-serif;
+  font-weight: 700;
+  font-size: 20px;
+  color: var(--white);
+  margin-bottom: 8px;
+  letter-spacing: -0.5px;
+}
+.edu-school {
+  font-size: 14px;
+  color: var(--orange);
+  margin-bottom: 6px;
+}
+.edu-period {
+  font-size: 11px;
+  color: var(--text-dimmer);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+}
+.edu-desc {
+  font-size: 13px;
+  color: var(--text-dim);
+  line-height: 1.7;
+}
+
+/* ─── CONTACT ─── */
+#contact {
+  background: var(--bg);
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+#contact::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 70% 70% at 50% 50%, rgba(255,140,0,0.06), transparent);
+}
+
+.contact-content { position: relative; z-index: 2; max-width: 600px; margin: 0 auto; }
+.contact-mail {
+  font-family: 'Syne', sans-serif;
+  font-weight: 700;
+  font-size: clamp(24px, 3.5vw, 42px);
+  color: var(--white);
+  letter-spacing: -1px;
+  margin-bottom: 40px;
+  word-break: break-all;
+}
+.contact-mail a {
+  color: var(--orange);
+  text-decoration: none;
+  transition: opacity 0.2s;
+}
+.contact-mail a:hover { opacity: 0.7; }
+
+.contact-links {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.clink {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 28px;
+  border: 1px solid rgba(255,255,255,0.1);
+  color: var(--text-dim);
+  text-decoration: none;
+  font-size: 12px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  transition: all 0.2s;
+}
+.clink:hover { border-color: var(--orange-border); color: var(--orange); }
+.clink.primary { background: var(--orange); border-color: var(--orange); color: var(--bg); }
+.clink.primary:hover { background: #ffaa33; }
+
+/* ─── FOOTER ─── */
+footer {
+  background: var(--bg);
+  border-top: 1px solid rgba(255,255,255,0.05);
+  padding: 32px 60px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 12px;
+  color: var(--text-dimmer);
+}
+footer span { color: var(--orange); }
+
+/* ─── RESPONSIVE ─── */
+@media (max-width: 900px) {
+  nav { padding: 16px 24px; }
+  .nav-links { display: none; }
+  section { padding: 80px 24px; }
+  .hero { padding: 100px 24px 60px; }
+  .hero-right { display: none; }
+  .about-grid { grid-template-columns: 1fr; gap: 40px; }
+  footer { flex-direction: column; gap: 8px; text-align: center; }
+}
+
+/* Scroll reveal */
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.7s ease;
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">A<span>.</span>Bouby</a>
+  <ul class="nav-links">
+    <li><a href="#about">À propos</a></li>
+    <li><a href="#skills">Compétences</a></li>
+    <li><a href="#experience">Expérience</a></li>
+    <li><a href="#projects">Projets</a></li>
+    <li><a href="#education">Formation</a></li>
+  </ul>
+  <a href="#contact" class="nav-cta">Contact</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+
+  <div class="hero-content">
+    <div class="hero-badge">Disponible · CDI Data / BI · Sept. 2025</div>
+    <h1 class="hero-name">Ahmedou<br><span class="accent">Bouby</span></h1>
+    <p class="hero-sub">
+      <strong>Data Analyst & Étudiant M2 MIAGE</strong><br>
+      Je transforme les données en décisions · SQL · Python · Power BI
+    </p>
+    <div class="hero-tags">
+      <span class="htag hot">Data Analysis</span>
+      <span class="htag hot">Business Intelligence</span>
+      <span class="htag">M2 MIAGE · Bordeaux</span>
+      <span class="htag">Orange · Alternance</span>
+      <span class="htag">🇫🇷 · 🇬🇧 · 🇸🇦</span>
+    </div>
+    <div class="hero-actions">
+      <a href="#contact" class="btn-primary">Me contacter →</a>
+      <a href="#experience" class="btn-secondary">Mon parcours</a>
+    </div>
+  </div>
+
+  <div class="hero-right">
+    <div class="stat-box">
+      <div class="s-label">Expérience actuelle</div>
+      <div class="s-val">Orange</div>
+      <div class="s-desc">Data Analyst · Alternance</div>
+    </div>
+    <div class="stat-box">
+      <div class="s-label">Compétences</div>
+      <div class="s-val">22 +</div>
+      <div class="s-desc">Technologies maîtrisées</div>
+    </div>
+    <div class="stat-box">
+      <div class="s-label">Langues</div>
+      <div class="s-val">3</div>
+      <div class="s-desc">Français · Anglais · Arabe</div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="reveal">
+    <p class="section-label">01 · À propos</p>
+    <h2 class="section-title">Qui suis-<span>je</span> ?</h2>
+  </div>
+  <div class="about-grid reveal">
+    <div class="about-text">
+      <p>
+        Étudiant en <strong>M2 MIAGE</strong> à l'Université de Bordeaux, je combine une double culture informatique et gestion des systèmes d'information, avec une spécialisation croissante en <strong>Data Analysis & Business Intelligence</strong>.
+      </p>
+      <p>
+        Actuellement en alternance chez <strong>Orange</strong> en tant que Data Analyst, j'interviens sur l'analyse des parcours clients, la définition de KPIs et l'automatisation du reporting via SQL, Python et Power BI.
+      </p>
+      <p>
+        Cette expérience m'a permis de transformer des données complexes en <strong>recommandations actionnables</strong> pour les équipes métier, développant ainsi une vision à la fois technique et stratégique.
+      </p>
+      <div class="about-langs">
+        <div class="lang-chip"><span class="flag">🇫🇷</span> Français</div>
+        <div class="lang-chip"><span class="flag">🇬🇧</span> Anglais</div>
+        <div class="lang-chip"><span class="flag">🇸🇦</span> Arabe</div>
+      </div>
+    </div>
+    <div class="about-cards">
+      <div class="acard">
+        <div class="icon">📊</div>
+        <div>
+          <div class="ac-title">Data Analysis</div>
+          <div class="ac-sub">KPIs, reporting, data quality, dashboards Power BI</div>
+        </div>
+      </div>
+      <div class="acard">
+        <div class="icon">💻</div>
+        <div>
+          <div class="ac-title">Développement Web</div>
+          <div class="ac-sub">React.js, Node.js, JavaScript, PHP, MySQL</div>
+        </div>
+      </div>
+      <div class="acard">
+        <div class="icon">🗄️</div>
+        <div>
+          <div class="ac-title">Bases de données</div>
+          <div class="ac-sub">SQL, MySQL, conception & modélisation BDD</div>
+        </div>
+      </div>
+      <div class="acard">
+        <div class="icon">🎯</div>
+        <div>
+          <div class="ac-title">Gestion de Projet SI</div>
+          <div class="ac-sub">MOA, systèmes d'information, MIAGE</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="reveal">
+    <p class="section-label">02 · Compétences</p>
+    <h2 class="section-title">Stack <span>technique</span></h2>
+  </div>
+  <div class="skills-grid reveal">
+
+    <div class="skill-cat">
+      <div class="skill-cat-title">📊 Data & BI</div>
+      <div class="skill-list">
+        <div class="skill-item">
+          <div class="skill-name">SQL / MySQL <span>Expert</span></div>
+          <div class="skill-bar"><div class="skill-fill" style="width:90%"></div></div>
+        </div>
+        <div class="skill-item">
+          <div class="skill-name">Python <span>Avancé</span></div>
+          <div class="skill-bar"><div class="skill-fill" style="width:80%"></div></div>
+        </div>
+        <div class="skill-item">
+          <div class="skill-name">Power BI <span>Avancé</span></div>
+          <div class="skill-bar"><div class="skill-fill" style="width:78%"></div></div>
+        </div>
+        <div class="skill-item">
+          <div class="skill-name">Analyse des données <span>Expert</span></div>
+          <div class="skill-bar"><div class="skill-fill" style="width:88%"></div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="skill-cat">
+      <div class="skill-cat-title">🌐 Développement Web</div>
+      <div class="skill-list">
+        <div class="skill-item">
+          <div class="skill-name">JavaScript <span>Avancé</span></div>
+          <div class="skill-bar"><div class="skill-fill" style="width:78%"></div></div>
+        </div>
+        <div class="skill-item">
+          <div class="skill-name">React.js <span>Intermédiaire</span></div>
+          <div class="skill-bar"><div class="skill-fill" style="width:65%"></div></div>
+        </div>
+        <div class="skill-item">
+          <div class="skill-name">Node.js <span>Intermédiaire</span></div>
+          <div class="skill-bar"><div class="skill-fill" style="width:60%"></div></div>
+        </div>
+        <div class="skill-item">
+          <div class="skill-name">PHP / HTML / CSS <span>Avancé</span></div>
+          <div class="skill-bar"><div class="skill-fill" style="width:75%"></div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="skill-cat">
+      <div class="skill-cat-title">⚙️ Programmation</div>
+      <div class="skill-list">
+        <div class="skill-item">
+          <div class="skill-name">Java <span>Intermédiaire</span></div>
+          <div class="skill-bar"><div class="skill-fill" style="width:65%"></div></div>
+        </div>
+        <div class="skill-item">
+          <div class="skill-name">C / C++ <span>Intermédiaire</span></div>
+          <div class="skill-bar"><div class="skill-fill" style="width:60%"></div></div>
+        </div>
+        <div class="skill-item">
+          <div class="skill-name">POO <span>Avancé</span></div>
+          <div class="skill-bar"><div class="skill-fill" style="width:75%"></div></div>
+        </div>
+        <div class="skill-item">
+          <div class="skill-name">Algo & Structures <span>Avancé</span></div>
+          <div class="skill-bar"><div class="skill-fill" style="width:78%"></div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="skill-cat">
+      <div class="skill-cat-title">🏢 Gestion & SI</div>
+      <div class="skill-list">
+        <div class="skill-item">
+          <div class="skill-name">Analyse financière <span>Intermédiaire</span></div>
+          <div class="skill-bar"><div class="skill-fill" style="width:65%"></div></div>
+        </div>
+        <div class="skill-item">
+          <div class="skill-name">Comptabilité <span>Intermédiaire</span></div>
+          <div class="skill-bar"><div class="skill-fill" style="width:60%"></div></div>
+        </div>
+        <div class="skill-item">
+          <div class="skill-name">Gestion de projet <span>Avancé</span></div>
+          <div class="skill-bar"><div class="skill-fill" style="width:72%"></div></div>
+        </div>
+        <div class="skill-item">
+          <div class="skill-name">Marketing digital <span>Notions</span></div>
+          <div class="skill-bar"><div class="skill-fill" style="width:45%"></div></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="reveal">
+    <p class="section-label">03 · Expérience</p>
+    <h2 class="section-title">Parcours <span>professionnel</span></h2>
+  </div>
+  <div class="timeline reveal">
+
+    <div class="exp-item">
+      <div class="exp-header">
+        <div>
+          <div class="exp-co">Orange</div>
+          <div class="exp-role">Data Analyst</div>
+          <div class="exp-meta">Septembre 2024 – Aujourd'hui · 1 an 9 mois · Bordeaux, France</div>
+        </div>
+        <span class="exp-badge">Alternance</span>
+      </div>
+      <ul class="exp-points">
+        <li>Analyse des parcours clients et modélisation de KPIs stratégiques pour le suivi de la performance commerciale</li>
+        <li>Automatisation des reportings hebdomadaires et mensuels via SQL, Python et Power BI, réduisant le temps de traitement manuel</li>
+        <li>Détection et correction d'anomalies data (data quality) pour garantir la fiabilité des tableaux de bord décisionnels</li>
+        <li>Formulation de recommandations actionnables présentées aux équipes métier pour optimiser l'expérience client</li>
+      </ul>
+      <div class="exp-techs">
+        <span class="tech-tag">SQL</span>
+        <span class="tech-tag">Python</span>
+        <span class="tech-tag">Power BI</span>
+        <span class="tech-tag">Data Quality</span>
+        <span class="tech-tag">KPIs</span>
+        <span class="tech-tag">Reporting</span>
+      </div>
+    </div>
+
+    <div class="exp-item">
+      <div class="exp-header">
+        <div>
+          <div class="exp-co">Meito Tech</div>
+          <div class="exp-role">Développeur Web Front-End</div>
+          <div class="exp-meta">Avril 2024 – Juillet 2024 · 4 mois · Bordeaux, France</div>
+        </div>
+        <span class="exp-badge stage">Stage</span>
+      </div>
+      <ul class="exp-points">
+        <li>Développement de composants front-end réutilisables en React.js pour améliorer l'expérience utilisateur</li>
+        <li>Intégration de maquettes UI/UX en HTML, CSS et JavaScript en collaboration avec l'équipe design</li>
+        <li>Participation aux revues de code et aux sprints de développement agile</li>
+      </ul>
+      <div class="exp-techs">
+        <span class="tech-tag">React.js</span>
+        <span class="tech-tag">JavaScript</span>
+        <span class="tech-tag">HTML / CSS</span>
+        <span class="tech-tag">Front-End</span>
+        <span class="tech-tag">Agile</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="reveal">
+    <p class="section-label">04 · Projets</p>
+    <h2 class="section-title">Mes <span>réalisations</span></h2>
+  </div>
+  <div class="projects-grid reveal">
+
+    <div class="project-card">
+      <div class="project-top">📊</div>
+      <div class="project-body">
+        <div class="project-title">Dashboard KPI Client — Orange</div>
+        <div class="project-desc">Tableau de bord décisionnel pour le suivi des parcours clients et de la performance commerciale. Automatisation complète du reporting via Python et Power BI.</div>
+        <div class="project-tags">
+          <span class="ptag">Power BI</span>
+          <span class="ptag">Python</span>
+          <span class="ptag">SQL</span>
+          <span class="ptag">Data Quality</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-top">🌐</div>
+      <div class="project-body">
+        <div class="project-title">Application Web — Meito Tech</div>
+        <div class="project-desc">Développement d'une interface utilisateur moderne avec React.js. Intégration de composants réutilisables et optimisation des performances front-end.</div>
+        <div class="project-tags">
+          <span class="ptag">React.js</span>
+          <span class="ptag">JavaScript</span>
+          <span class="ptag">CSS</span>
+          <span class="ptag">UX/UI</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-top">🗄️</div>
+      <div class="project-body">
+        <div class="project-title">Conception BDD — Projet M2 MIAGE</div>
+        <div class="project-desc">Modélisation et conception d'une base de données relationnelle dans le cadre universitaire. Merise, MCD/MLD, optimisation des requêtes SQL.</div>
+        <div class="project-tags">
+          <span class="ptag">MySQL</span>
+          <span class="ptag">Merise</span>
+          <span class="ptag">SQL</span>
+          <span class="ptag">Modélisation</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <p style="margin-top:32px; font-size:13px; color:var(--text-dimmer); text-align:center;">
+    ✏️ <em>Personnalise cette section avec tes vrais projets académiques et personnels</em>
+  </p>
+</section>
+
+<!-- EDUCATION -->
+<section id="education">
+  <div class="reveal">
+    <p class="section-label">05 · Formation</p>
+    <h2 class="section-title">Parcours <span>académique</span></h2>
+  </div>
+  <div class="edu-grid reveal">
+
+    <div class="edu-card">
+      <div class="edu-degree">M2 MIAGE</div>
+      <div class="edu-school">Université de Bordeaux</div>
+      <div class="edu-period">2024 – 2025 (en cours)</div>
+      <div class="edu-desc">Master Méthodes Informatiques Appliquées à la Gestion des Entreprises. Spécialisation en systèmes d'information, data management et gestion de projet SI.</div>
+    </div>
+
+    <div class="edu-card">
+      <div class="edu-degree">Licence MIAGE</div>
+      <div class="edu-school">Université de Bordeaux</div>
+      <div class="edu-period">Sept. 2023 – Sept. 2024</div>
+      <div class="edu-desc">Licence en Méthodes Informatiques Appliquées à la Gestion. Comptabilité, systèmes d'information, POO, marketing et développement logiciel.</div>
+    </div>
+
+    <div class="edu-card">
+      <div class="edu-degree">DEUG Informatique</div>
+      <div class="edu-school">Université de Bordeaux</div>
+      <div class="edu-period">Sept. 2020 – Sept. 2023</div>
+      <div class="edu-desc">Diplôme d'études universitaires générales en Informatique Générale. Fondamentaux de la programmation, algorithmique, C/C++, Java et bases de données.</div>
+    </div>
+
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="contact-content reveal">
+    <p class="section-label" style="text-align:center; margin-bottom:20px;">06 · Contact</p>
+    <h2 class="section-title" style="margin-bottom:16px;">Travaillons <span>ensemble</span></h2>
+    <p style="color:var(--text-dim); margin-bottom:40px;">Je suis à la recherche d'un CDI en Data Analysis ou Business Intelligence pour septembre 2025. N'hésitez pas à me contacter !</p>
+    <div class="contact-mail">
+      <a href="mailto:votre.email@email.com">votre.email@email.com</a>
+    </div>
+    <div class="contact-links">
+      <a href="https://www.linkedin.com/in/ahmedou-bouby-88647a260" target="_blank" class="clink primary">LinkedIn →</a>
+      <a href="mailto:votre.email@email.com" class="clink">✉ Email</a>
+      <a href="tel:+33XXXXXXXXX" class="clink">📞 Téléphone</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div>© 2025 <span>Ahmedou Bouby</span> · Étudiant M2 MIAGE · Data Analyst</div>
+  <div>Bordeaux, Nouvelle-Aquitaine, France</div>
+</footer>
+
+<script>
+// Scroll reveal
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+// Nav scroll effect
+window.addEventListener('scroll', () => {
+  const nav = document.querySelector('nav');
+  if (window.scrollY > 50) {
+    nav.style.boxShadow = '0 4px 40px rgba(0,0,0,0.4)';
+  } else {
+    nav.style.boxShadow = 'none';
+  }
+});
+</script>
+
+</body>
+</html>
